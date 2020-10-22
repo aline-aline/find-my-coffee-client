@@ -1,12 +1,14 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import Business from './components/Business'
 
-import BusinessesService from './services/business_service'
+import BusinessService from './services/business_service'
 
 function App() {
   const [latitude, setLatitude] = useState(0)
   const [longitude, setLongitude] = useState(0)
   const [locations, setLocation] = useState([])
+  const [selected, setSelected] = useState({})
 
   const { REACT_APP_GOOGLE_API_KEY } = process.env
 
@@ -25,7 +27,7 @@ function App() {
   }
 
   async function loadCoffeeShops() {
-    const response = await BusinessesService.index(latitude, longitude)
+    const response = await BusinessService.index(latitude, longitude)
     setLocation(response.data.results)
   }
 
@@ -41,9 +43,15 @@ function App() {
             return (
               <Marker key={index} icon="/images/coffee-pin.png" title={item.name} animation="4" 
                 position={{lat: item.geometry.location.lat, lng: item.geometry.location.lng}}
+                onClick={() => setSelected(item)}
               />
             )
           })
+        }
+        {
+          selected.place_id && (
+            <Business place={selected}/>
+          )
         }
         <Marker key="my location" icon="/images/my-location-pin.png" title="Your local" animation="2"
           position={{lat: latitude, lng: longitude}}
