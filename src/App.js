@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 import Business from './components/Business'
+import NearestCoffees from './components/NearestCoffees'
 
 import BusinessService from './services/business_service'
 
@@ -56,6 +57,10 @@ function App() {
         <Marker key="my location" icon="/images/my-location-pin.png" title="Your local" animation="2"
           position={{lat: latitude, lng: longitude}}
         />
+
+        {(latitude != 0 && longitude != 0) &&
+          <NearestCoffees latitude={latitude} longitude={longitude} />
+        }
 
         </GoogleMap>
       </LoadScript>
