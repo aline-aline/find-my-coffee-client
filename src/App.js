@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
 
-import BusinessesService from './services/google_list_of_businesses'
+import BusinessesService from './services/business_service'
 
 function App() {
   const [latitude, setLatitude] = useState(0)
