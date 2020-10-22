@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import BusinessService from '../../services/business_service'
+import Ratings from './Ratings'
 
 import styled from 'styled-components'
 
@@ -67,6 +68,8 @@ const Business = (props) => {
       }
       <hr/>
       <Paragraph>{business.formatted_address}</Paragraph>
+
+      <Ratings place={props.place}/>
     </LeftBar>
   )
 }
